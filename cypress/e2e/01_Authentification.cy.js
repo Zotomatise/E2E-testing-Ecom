@@ -7,7 +7,7 @@ describe("Creer un compte, puis se connecter avec le nouvel utilisateur", () => 
     cy.writeFile("cypress/fixtures/user.json", { username, password });
     cy.visit("https://www.demoblaze.com/");
   });
-  it("Création de compte utilisateur", () => {
+  it("Création de compte utilisateur - Demo Git", () => {
     cy.fixture("user").then((user) => {
       cy.intercept("POST", "**/signup").as("compteUser");
 
@@ -17,7 +17,6 @@ describe("Creer un compte, puis se connecter avec le nouvel utilisateur", () => 
   });
   it("Connexion avec le compte créé", () => {
     cy.fixture("user").then((user) => {
-
       cy.Login(user.username, user.password);
       cy.contains(`Welcome ${user.username}`).should("not.be.visible");
     });
